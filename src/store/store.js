@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { createSlice } from '@reduxjs/toolkit';
 
 // const blackPinkObject = (a) => {
 //     if (a === 'jennie') {
@@ -25,6 +26,28 @@ const initialState = {
     counter: 0,
     showCounter: true
 }
+
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState: initialState,
+    reducers: {
+        increment(state) {
+            state.counter++
+        },
+        decrement(state) {
+            state.counter--
+        },
+        increase(state, action) {
+            state.counter = state.counter + action.amount
+        },
+        reset(state, action) {
+            state.counter = action.amount
+        },
+        toggleCounter(state) {
+            state.showCounter = !state.showCounter
+        }
+    }
+});
 
 const counterReducer = (state = initialState, action) => {
 
@@ -66,6 +89,7 @@ const counterReducer = (state = initialState, action) => {
     return state;
 }
 
+// const store = createStore(counterSlice.reducer)
 const store = createStore(counterReducer)
 // console.log(store)
 /*
@@ -77,3 +101,4 @@ export default store;
 
 // store.dispatch({ type: 'increment' })
 // store.dispatch({ type: 'decrement' })
+
